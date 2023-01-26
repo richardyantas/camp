@@ -29,8 +29,8 @@ variable "gcp_vpc_cidr"  {
 }
 
 variable "gcp_zone"{
-    # default = "europe-west3" # asia-northeast1
-    default = "asia-northeast1"
+    default = "europe-west3" # asia-northeast1
+    #default = "asia-northeast1"
 }
 
 # variable "zones" {
