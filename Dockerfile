@@ -15,15 +15,20 @@ RUN mkdir /.ssh
 ENV PATH /google-cloud-sdk/bin:$PATH
 # VOLUME ["/.config"]
 
-# Install Terrraform
-# RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-# RUN echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-# RUN apt-get install -y terraform
+# Install Terraform
 
 # RUN wget https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip
 # RUN unzip terraform_1.3.7_linux_amd64.zip
 # RUN sudo mv terraform /usr/bin
 # which terraform && terraform version
+
+# Install docker
+
+RUN apt-get update && \
+    apt-get -qy full-upgrade && \
+    apt-get install -qy curl && \
+    apt-get install -qy curl && \
+    curl -sSL https://get.docker.com/ | sh
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt

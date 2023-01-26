@@ -59,3 +59,7 @@
 # wget https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip
 # unzip terraform_1.3.7_linux_amd64.zip
 # mv terraform /usr/bin/
+
+
+# RUN to build the image
+# CMD ["python3","app.py" ] to execute when the container start

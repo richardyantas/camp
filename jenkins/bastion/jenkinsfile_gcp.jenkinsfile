@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    environment {
+        CLOUDSDK_CORE_PROJECT='jovial-atlas-375801'
+        CLIENT_EMAIL='jenkins-gcloud@jovial-atlas-375801.iam.gserviceaccount.com'
+        GCLOUD_CREDS=credentials('gcloud-creds')
+    }
+    stages {
+        stage('test') {
+            steps {
+                sh '''
+                     gcloud version
+                     gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                     gcloud compute zones list
+                    '''
+                /*
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]) {
+                    // some block
+                    sh '''
+                     gcloud version
+                     gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                     gcloud compute zones list
+                    '''
+                }
+                */
+            }
+        }
+    }
+    post {
+        always {
+            sh 'gcloud auth revoke $CLIENT_EMAIL'
+        }
+    }
+}

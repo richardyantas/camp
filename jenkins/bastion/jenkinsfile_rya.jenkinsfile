@@ -2,18 +2,19 @@ pipeline {
     agent any
     options {disableConcurrentBuilds()}
     environment {
-        CLOUDSDK_CORE_PROJECT='jovial-atlas-375801'
-        CLIENT_EMAIL='jenkins-gcloud@jovial-atlas-375801.iam.gserviceaccount.com'
-        GCLOUD_CREDS=credentials('gcloud-creds')
         // GOOGLE_PROJECT_ID = "ivory-honor-272915" 
         // GOOGLE_PROJECT_NAME = "Proyecto-ideas-extraordinarias"
         // GOOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform')
         // GOOGLE_CLOUD_KEYFILE_JSON = credentials('sc_jenkins_terraform')
+        GOOGLE_PROJECT_ID = "jovial-atlas-375801" 
+        GOOGLE_PROJECT_NAME = "My First Project"
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform_test2')
+        GOOGLE_CLOUD_KEYFILE_JSON = credentials('sc_jenkins_terraform_test2')
     }
-    parameters { 
-      choice(name: 'ENTORNOS', choices: ['dev', 'pre', 'pro'], description: 'Seleccione el entorno a utilizar')
-      choice(name: 'ACCION', choices: ['', 'plan-apply', 'destroy'], description: 'Seleccione el entorno a utilizar')
-    }
+    // parameters { 
+    //   choice(name: 'ENTORNOS', choices: ['dev', 'pre', 'pro'], description: 'Seleccione el entorno a utilizar')
+    //   choice(name: 'ACCION', choices: ['', 'plan-apply', 'destroy'], description: 'Seleccione el entorno a utilizar')
+    // }
     stages{
         
         stage('clean workspaces -----------') { 
@@ -33,7 +34,7 @@ pipeline {
                     extensions: [[$class: 'CleanCheckout']], 
                     submoduleCfg: [], 
                     userRemoteConfigs: [
-                        [url: 'git@github.com:agustinjaume/jenkins-terraform.git', credentialsId: '']
+                        [url: 'https://github.com/richardyantas/camp.git', credentialsId: '']
                         ]])
                 sh 'pwd' 
                 sh 'ls -l'
@@ -57,28 +58,28 @@ pipeline {
             } //steps
         }  //stage
         
-        stage('Confirmación de accion') {
-            steps {
-                script {
-                    def userInput = input(id: 'confirm', message: params.ACCION + '?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-                }
-            }
-        }
+        // stage('Confirmación de accion') {
+        //     steps {
+        //         script {
+        //             def userInput = input(id: 'confirm', message: params.ACCION + '?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+        //         }
+        //     }
+        // }
         
-        stage('Terraform apply or destroy ----------------') {
-            steps {
-               sh 'echo "comienza"'
-            script{  
-                if (params.ACCION == "destroy"){
-                         sh ' echo "llego" + params.ACCION'   
-                         sh 'cd bastion && terraform destroy -var-file="../variables/dev.tfvars" -auto-approve'
-                } else {
-                         sh ' echo  "llego" + params.ACCION'                 
-                         sh 'cd bastion && terraform apply -refresh=true -var-file="../variables/dev.tfvars"  -auto-approve'  
-                }  // if
+        // stage('Terraform apply or destroy ----------------') {
+        //     steps {
+        //        sh 'echo "comienza"'
+        //     script{  
+        //         if (params.ACCION == "destroy"){
+        //                  sh ' echo "llego" + params.ACCION'   
+        //                  sh 'cd bastion && terraform destroy -var-file="../variables/dev.tfvars" -auto-approve'
+        //         } else {
+        //                  sh ' echo  "llego" + params.ACCION'                 
+        //                  sh 'cd bastion && terraform apply -refresh=true -var-file="../variables/dev.tfvars"  -auto-approve'  
+        //         }  // if
 
-            }
-            } //steps
-        }  //stage
+        //     }
+        //     } //steps
+        // }  //stage
    }  // stages
 } //pipeline
