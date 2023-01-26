@@ -9,7 +9,7 @@ variable "gcp_vpc_name"{
 }
 
 variable "gcp_subnet_1" {
-    default = "subnet-2d651a41ced44247-ideasextraordinarias-des"
+    default = "vpc-subnet-sc-jenkins-terraform-des"
 }
 
 variable "gcp_region" {
@@ -21,7 +21,7 @@ variable "gcp_project_id" {
 }
 
 variable "client" {
-    default = "ideasextraordinarias"
+    default = "sc-jenkins-terraform"
 }
 
 variable "gcp_vpc_cidr"  {
@@ -29,12 +29,13 @@ variable "gcp_vpc_cidr"  {
 }
 
 variable "gcp_zone"{
-    default = "europe-west3"
+    # default = "europe-west3" # asia-northeast1
+    default = "asia-northeast1"
 }
 
-variable "zones" {
-    default = ["europe-west3a","europe-west3b","europe-west3c"]
-}
+# variable "zones" {
+#     default = ["europe-west3a","europe-west3b","europe-west3c"]
+# }
 
 variable "cidr_blocks" {
     default = "0.0.0.0/0"
@@ -72,13 +73,14 @@ data "google_compute_zones" "available" {
 }
 
 resource "google_compute_address" "static" {
-  name = "ip-external-ideasextraordinarias"
+  name = "ip-external-sc-terraform"
 }
 
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   machine_type = "f1-micro"
-  zone         =  "europe-west3-a"  
+  # zone         =  "europe-west3-a"  
+  zone = "asia-northeast1"
   tags = [
     "${var.environment}-bastion-http",
     "${var.environment}-bastion-ssh"
