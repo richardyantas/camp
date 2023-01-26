@@ -86,7 +86,7 @@ resource "google_compute_instance" "bastion_instance" {
      ]
   project      =  var.gcp_project_id
   # description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
-  description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1}"
+  description   = "${var.client}-${var.environment}"
   network_interface { 
     subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
     subnetwork_project = var.gcp_project_id 
