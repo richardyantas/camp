@@ -46,7 +46,8 @@ pipeline {
             sh 'terraform --version'
             sh ' cd bastion && ls -la'
             sh ' cd bastion && gcloud projects list'
-            sh ' cd bastion && terraform init -var-file "../variables/dev2.tfvars" '
+            sh ' cd bastion && terraform init -var-file "../variables/dev.tfvars" '
+            // sh ' cd bastion && terraform init -var-file "../variables/dev2.tfvars" '
             // sh ' cd bastion && terraform init" '
             } //steps
         }  //stage
@@ -55,7 +56,8 @@ pipeline {
             steps {
                sh 'cd bastion && ls -la'
                sh 'cd bastion && gcloud projects list'
-               sh 'cd bastion && terraform plan  -refresh=true  -var-file "../variables/dev2.tfvars" -lock=false'
+               sh 'cd bastion && terraform plan  -refresh=true  -var-file "../variables/dev.tfvars" -lock=false'
+               // sh 'cd bastion && terraform plan  -refresh=true  -var-file "../variables/dev2.tfvars" -lock=false'
                // sh 'cd bastion && terraform plan  -refresh=true" -lock=false'
             } //steps
         }  //stage
@@ -74,10 +76,10 @@ pipeline {
             script{  
                 if (params.ACCION == "destroy"){
                          sh ' echo "llego" + params.ACCION'   
-                         sh 'cd bastion && terraform destroy -var-file="../variables/dev2.tfvars" -auto-approve'
+                         sh 'cd bastion && terraform destroy -var-file="../variables/dev.tfvars" -auto-approve'
                 } else {
                          sh ' echo  "llego" + params.ACCION'                 
-                         sh 'cd bastion && terraform apply -refresh=true -var-file="../variables/dev2.tfvars"  -auto-approve'  
+                         sh 'cd bastion && terraform apply -refresh=true -var-file="../variables/dev.tfvars"  -auto-approve'  
                 }  // if
 
             }

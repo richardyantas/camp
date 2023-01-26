@@ -1,4 +1,41 @@
 
+variable "environment"{
+    default = "dev"
+}
+
+variable "gcp_vpc_name"{
+    default = "vpc-ideasextraordinarias-des"
+}
+
+variable "gcp_subnet_1" {
+}
+
+variable "gcp_region" {
+}
+
+variable "gcp_project_id" {    
+}
+
+variable "client" {    
+}
+
+variable "gcp_vpc_cidr"  {    
+}
+
+variable "gcp_zone"{    
+}
+
+variable "zones" {    
+}
+
+variable "cidr_blocks" {
+}
+
+variable "machine_type" {    
+}
+
+variable "metadata_startup_script" {    
+}
 
 resource "google_compute_address" "static" {
   name = "ip-external-ideasextraordinarias"
