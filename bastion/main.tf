@@ -95,7 +95,10 @@ resource "google_compute_instance" "bastion_instance" {
   }
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      # image = "debian-cloud/debian-9"  after do 
+      # gcloud config set project jovial-atlas-375801
+      # gcloud compute images list | grep debian
+      image = "debian-cloud/debian-10"
     }
   }
   metadata = {
@@ -111,7 +114,7 @@ resource "google_compute_firewall" "http" {
   name    = "${var.environment}-firewall-http"
   # network = "${data.google_compute_network.vpc.name}" # "${google_compute_network.ovirt_network.name}"
   network = "vpc-ideasextraordinarias-des"
-  
+
   allow {
     protocol = "tcp"
     ports    = ["80", "443"]
