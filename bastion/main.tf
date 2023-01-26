@@ -57,7 +57,7 @@ provider "google" {
 
 data "google_compute_network" "vpc" {
   # name       = var.gcp_vpc_name #  gcp_vpc_name
-  name = "vpc-sc_jenkins_terraform-des"
+  name = "vpc-sc-jenkins-terraform-des"
   project    = var.gcp_project_id
 }
 
