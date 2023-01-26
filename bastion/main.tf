@@ -8,34 +8,41 @@ variable "gcp_vpc_name"{
 }
 
 variable "gcp_subnet_1" {
+    default = "subnet-2d651a41ced44247-ideasextraordinarias-des"
 }
 
 variable "gcp_region" {
+    default = "europe-west1"
 }
 
-variable "gcp_project_id" {    
+variable "gcp_project_id" {
+    default = "jovial-atlas-375801"
 }
 
-variable "client" {    
+variable "client" {
+    default = "ideasextraordinarias"
 }
 
-variable "gcp_vpc_cidr"  {    
+variable "gcp_vpc_cidr"  {
+    default = "172.31.0.0/16"
 }
 
-variable "gcp_zone"{    
+variable "gcp_zone"{
+    default = "europe-west3"
 }
 
-variable "zones" {    
+variable "zones" {
+    default = ["europe-west3a","europe-west3b","europe-west3c"]
 }
 
 variable "cidr_blocks" {
+    default = "0.0.0.0/0"
 }
 
-variable "machine_type" {    
+variable "machine_type" {
+    default = "f1.micro"
 }
 
-variable "metadata_startup_script" {    
-}
 
 resource "google_compute_address" "static" {
   name = "ip-external-ideasextraordinarias"
