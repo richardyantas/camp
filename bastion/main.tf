@@ -1,4 +1,5 @@
 
+
 variable "environment"{
     default = "dev"
 }
@@ -46,6 +47,28 @@ variable "machine_type" {
 variable "metadata_startup_script" {
     default = "scripts/bootstrap.sh"
 }
+
+
+provider "google" {
+  project     = var.gcp_project_id
+  region      = var.gcp_zone
+}
+
+data "google_compute_network" "vpc" {
+  name       = var.gcp_vpc_name #  gcp_vpc_name
+  project    = var.gcp_project_id
+}
+
+data "google_compute_subnetwork" "subnet-1" {
+  name   = var.gcp_subnet_1  
+  region = var.gcp_zone
+}
+
+data "google_compute_zones" "available" {
+  region = var.gcp_zone  #"europe-west3" 
+  status = "UP"
+}
+
 
 
 resource "google_compute_address" "static" {
