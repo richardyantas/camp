@@ -55,7 +55,8 @@ provider "google" {
 }
 
 data "google_compute_network" "vpc" {
-  name       = var.gcp_vpc_name #  gcp_vpc_name
+  # name       = var.gcp_vpc_name #  gcp_vpc_name
+  name = "vpc-ideasextraordinarias-des"
   project    = var.gcp_project_id
 }
 
@@ -69,8 +70,6 @@ data "google_compute_zones" "available" {
   region = var.gcp_zone  #"europe-west3" 
   status = "UP"
 }
-
-
 
 resource "google_compute_address" "static" {
   name = "ip-external-ideasextraordinarias"
