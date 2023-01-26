@@ -109,7 +109,8 @@ resource "google_compute_instance" "bastion_instance" {
 
 resource "google_compute_firewall" "http" {
   name    = "${var.environment}-firewall-http"
-  network = "${data.google_compute_network.vpc.name}" # "${google_compute_network.ovirt_network.name}"
+  # network = "${data.google_compute_network.vpc.name}" # "${google_compute_network.ovirt_network.name}"
+  network = "vpc-ideasextraordinarias-des"
   
   allow {
     protocol = "tcp"
@@ -122,7 +123,8 @@ resource "google_compute_firewall" "http" {
 
 resource "google_compute_firewall" "ssh" {
   name    = "${var.environment}-firewall-ssh"
-  network = "${data.google_compute_network.vpc.name}"
+  network = "vpc-ideasextraordinarias-des"
+  # network = "${data.google_compute_network.vpc.name}"
 
   allow {
     protocol = "tcp"
