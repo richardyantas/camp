@@ -17,18 +17,18 @@ ENV PATH /google-cloud-sdk/bin:$PATH
 
 # Install Terraform
 
-# RUN wget https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip
-# RUN unzip terraform_1.3.7_linux_amd64.zip
-# RUN sudo mv terraform /usr/bin
+RUN wget https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip
+RUN unzip terraform_1.3.7_linux_amd64.zip
+RUN mv terraform /usr/bin
 # which terraform && terraform version
 
 # Install docker
 
-RUN apt-get update && \
-    apt-get -qy full-upgrade && \
-    apt-get install -qy curl && \
-    apt-get install -qy curl && \
-    curl -sSL https://get.docker.com/ | sh
+# RUN apt-get update && \
+#     apt-get -qy full-upgrade && \
+#     apt-get install -qy curl && \
+#     apt-get install -qy curl && \
+#     curl -sSL https://get.docker.com/ | sh
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
