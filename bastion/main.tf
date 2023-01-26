@@ -60,6 +60,7 @@ data "google_compute_network" "vpc" {
 }
 
 data "google_compute_subnetwork" "subnet-1" {
+  ip_cidr_range = "10.2.0.0/16" # added by richard
   name   = var.gcp_subnet_1  
   region = var.gcp_zone
 }
@@ -84,6 +85,7 @@ resource "google_compute_instance" "bastion_instance" {
     "${var.environment}-bastion-ssh"
      ]
   project      =  var.gcp_project_id
+  # description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
   description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
   network_interface { 
     subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
