@@ -54,7 +54,7 @@ pipeline {
             steps {
                sh 'cd bastion && ls -la'
                sh 'cd bastion && gcloud projects list'
-               sh 'cd bastion && terraform plan  -refresh=true  -var-file="../variables/dev.tfvars" -lock=false'
+            //    sh 'cd bastion && terraform plan  -refresh=true  -var-file="../variables/dev.tfvars" -lock=false'
             } //steps
         }  //stage
         
@@ -82,4 +82,4 @@ pipeline {
         //     } //steps
         // }  //stage
    }  // stages
-} //pipeline
+} //pipeline    
