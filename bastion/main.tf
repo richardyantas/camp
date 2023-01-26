@@ -43,6 +43,10 @@ variable "machine_type" {
     default = "f1.micro"
 }
 
+variable "metadata_startup_script" {
+    default = "scripts/bootstrap.sh"
+}
+
 
 resource "google_compute_address" "static" {
   name = "ip-external-ideasextraordinarias"
