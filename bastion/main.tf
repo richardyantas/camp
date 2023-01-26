@@ -5,7 +5,7 @@ variable "environment"{
 }
 
 variable "gcp_vpc_name"{
-    default = "vpc-ideasextraordinarias-des"
+    default = "vpc-sc-jenkins-terraform-des"
 }
 
 variable "gcp_subnet_1" {
@@ -56,7 +56,7 @@ provider "google" {
 
 data "google_compute_network" "vpc" {
   # name       = var.gcp_vpc_name #  gcp_vpc_name
-  name = "vpc-ideasextraordinarias-des"
+  name = "vpc-sc_jenkins_terraform-des"
   project    = var.gcp_project_id
 }
 
@@ -113,7 +113,7 @@ resource "google_compute_instance" "bastion_instance" {
 resource "google_compute_firewall" "http" {
   name    = "${var.environment}-firewall-http"
   # network = "${data.google_compute_network.vpc.name}" # "${google_compute_network.ovirt_network.name}"
-  network = "vpc-ideasextraordinarias-des"
+  network = "vpc-sc-jenkins-terraform-des"
 
   allow {
     protocol = "tcp"
@@ -126,7 +126,7 @@ resource "google_compute_firewall" "http" {
 
 resource "google_compute_firewall" "ssh" {
   name    = "${var.environment}-firewall-ssh"
-  network = "vpc-ideasextraordinarias-des"
+  network = "vpc-sc-jenkins-terraform-des"
   # network = "${data.google_compute_network.vpc.name}"
 
   allow {
