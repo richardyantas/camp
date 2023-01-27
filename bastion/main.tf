@@ -13,7 +13,7 @@ variable "gcp_subnet_1" {
 }
 
 variable "gcp_region" {
-    default = "europe-west1"
+    default = "europe-west3"
 }
 
 variable "gcp_project_id" {
@@ -29,7 +29,7 @@ variable "gcp_vpc_cidr"  {
 }
 
 variable "gcp_zone"{
-    default = "europe-west3" # asia-northeast1
+    default = "europe-west3a" # asia-northeast1
     #default = "asia-northeast1"
 }
 
@@ -79,7 +79,7 @@ resource "google_compute_address" "static" {
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   machine_type = "f1-micro"
-  zone         =  "europe-west3-a"  
+  zone         =  "europe-west3a"
   # zone = "asia-northeast1"
   tags = [
     "${var.environment}-bastion-http",
