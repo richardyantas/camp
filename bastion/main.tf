@@ -1,86 +1,11 @@
-
-
-variable "environment"{
-    default = "dev"
-}
-
-variable "gcp_vpc_name"{
-    default = "vpc-sc-jenkins-terraform-des"
-}
-
-variable "gcp_subnet_1" {
-    default = "vpc-subnet-sc-jenkins-terraform-des"
-}
-
-variable "gcp_region" {
-    default = "europe-west1"
-}
-
-variable "gcp_project_id" {
-    default = "jovial-atlas-375801"
-}
-
-variable "client" {
-    default = "sc-jenkins-terraform"
-}
-
-variable "gcp_vpc_cidr"  {
-    default = "172.31.0.0/16"
-}
-
-variable "gcp_zone"{
-    default = "europe-west3a" # asia-northeast1
-    #default = "asia-northeast1"
-}
-
-# variable "zones" {
-#     default = ["europe-west3a","europe-west3b","europe-west3c"]
-# }
-
-variable "cidr_blocks" {
-    default = "0.0.0.0/0"
-}
-
-variable "machine_type" {
-    default = "f1.micro"
-}
-
-variable "metadata_startup_script" {
-    default = "scripts/bootstrap.sh"
-}
-
-
-provider "google" {
-  project     = var.gcp_project_id
-  region      = var.gcp_zone
-}
-
-data "google_compute_network" "vpc" {
-  # name       = var.gcp_vpc_name #  gcp_vpc_name
-  name = "vpc-sc-jenkins-terraform-des"
-  project    = var.gcp_project_id
-}
-
-data "google_compute_subnetwork" "subnet-1" {
-  # ip_cidr_range = "10.2.0.0/16" # added by richard
-  name   = var.gcp_subnet_1  
-  region = var.gcp_zone
-}
-
-data "google_compute_zones" "available" {
-  region = var.gcp_zone  #"europe-west3" 
-  status = "UP"
-}
-
 resource "google_compute_address" "static" {
-  name = "ip-external-sc-terraform"
+  name = "ip-external-ideasextraordinarias"
 }
 
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   machine_type = "f1-micro"
   zone         =  "europe-west3-a"  
-  # zone = "asia-northeast1"
   tags = [
     "${var.environment}-bastion-http",
     "${var.environment}-bastion-ssh"
@@ -89,8 +14,7 @@ resource "google_compute_instance" "bastion_instance" {
   # description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
   description   = "${var.client}-${var.environment}"
   network_interface { 
-    # subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
-    subnetwork = "vpc-subnet-sc-jenkins-terraform-des"
+    subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
     subnetwork_project = var.gcp_project_id 
     access_config {
       nat_ip = google_compute_address.static.address
@@ -98,9 +22,6 @@ resource "google_compute_instance" "bastion_instance" {
   }
   boot_disk {
     initialize_params {
-      # image = "debian-cloud/debian-9"  after do 
-      # gcloud config set project jovial-atlas-375801
-      # gcloud compute images list | grep debian
       image = "debian-cloud/debian-10"
     }
   }
@@ -115,9 +36,8 @@ resource "google_compute_instance" "bastion_instance" {
 
 resource "google_compute_firewall" "http" {
   name    = "${var.environment}-firewall-http"
-  # network = "${data.google_compute_network.vpc.name}" # "${google_compute_network.ovirt_network.name}"
-  network = "vpc-sc-jenkins-terraform-des"
-
+  network = "${data.google_compute_network.vpc.name}" # "${google_compute_network.ovirt_network.name}"
+  
   allow {
     protocol = "tcp"
     ports    = ["80", "443"]
@@ -129,8 +49,7 @@ resource "google_compute_firewall" "http" {
 
 resource "google_compute_firewall" "ssh" {
   name    = "${var.environment}-firewall-ssh"
-  network = "vpc-sc-jenkins-terraform-des"
-  # network = "${data.google_compute_network.vpc.name}"
+  network = "${data.google_compute_network.vpc.name}"
 
   allow {
     protocol = "tcp"
