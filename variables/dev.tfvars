@@ -12,7 +12,7 @@ gcp_region = "europe-west1"
 gcp_project_id = "jovial-atlas-375801"
 client = "sc-jenkins-terraform"
 gcp_vpc_cidr = "172.31.0.0/16"  # Ipv4 range = 10.0.0.0/24
-gcp_zone = "europe-west1"
+gcp_zone = "europe-west3"
 # zones = ["europe-west3a","europe-west3b","europe-west3c"]
 
 # vm - BASTION ---------------------------
