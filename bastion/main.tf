@@ -3,8 +3,9 @@ resource "google_compute_address" "static" {
 }
 
 # resource "google_compute_instance" "bastion_instance" {
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
+  # name         = "test"
   machine_type = "f1-micro"
   zone         =  "europe-west3-a"
   # zone         =  "europe-west3"  
@@ -15,20 +16,23 @@ resource "google_compute_instance" "default" {
   project      =  var.gcp_project_id
   # description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
   description   = "${var.client}-${var.environment}"
-  network_interface { 
-    subnetwork = "${data.google_compute_subnetwork.subnet_one.name}"   
-    # subnetwork = "vpc-subnet-sc-jenkins-terraform-des"                 
-    # subnetwork_project = var.gcp_project_id 
-    subnetwork_project = "jovial-atlas-375801"
-    access_config {
-      # nat_ip = google_compute_address.static.address
-    }
-  }
+
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-10"
     }
   }
+
+  network_interface { 
+    # subnetwork = "${data.google_compute_subnetwork.subnet_one.name}"   
+    subnetwork = "vpc-subnet-sc-jenkins-terraform-des"                 
+    subnetwork_project = var.gcp_project_id 
+    # subnetwork_project = "jovial-atlas-375801"
+    access_config {
+      # nat_ip = google_compute_address.static.address
+    }
+  }
+  
   metadata = {
      # ssh-keys = "${var.ssh_user}:${var.ssh_pub_key_file}"
      # enable-oslogin = "TRUE"  Esto no me funciono aplicand permisos a los usuarios.
