@@ -13,7 +13,7 @@ variable "gcp_subnet_1" {
 }
 
 variable "gcp_region" {
-    default = "europe-west3"
+    default = "europe-west1"
 }
 
 variable "gcp_project_id" {
@@ -79,7 +79,7 @@ resource "google_compute_address" "static" {
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   machine_type = "f1-micro"
-  zone         =  "europe-west3a"
+  zone         =  "europe-west3-a"  
   # zone = "asia-northeast1"
   tags = [
     "${var.environment}-bastion-http",
