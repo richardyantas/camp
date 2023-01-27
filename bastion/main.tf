@@ -52,15 +52,15 @@ resource "google_compute_firewall" "http" {
   source_ranges = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "ssh" {
-  name    = "${var.environment}-firewall-ssh"
-  network = "${data.google_compute_network.vpc.name}"
+# resource "google_compute_firewall" "ssh" {
+#   name    = "${var.environment}-firewall-ssh"
+#   network = "${data.google_compute_network.vpc.name}"
 
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
+#   allow {
+#     protocol = "tcp"
+#     ports    = ["22"]
+#   }
 
-  target_tags   = ["${var.environment}-bastion-ssh"]
-  source_ranges = ["0.0.0.0/0"]
-}
+#   target_tags   = ["${var.environment}-bastion-ssh"]
+#   source_ranges = ["0.0.0.0/0"]
+# }
