@@ -14,18 +14,18 @@ output "description" {
  value = google_compute_instance.bastion_instance.description
 }
 
-# output "networkip" {
-#  value = google_compute_instance.bastion_instance.network_interface.0.network_ip
-# }
+output "networkip" {
+ value = google_compute_instance.bastion_instance.network_interface.0.network_ip
+}
 
-# output "subnetwork" {
-#  value = google_compute_instance.bastion_instance.network_interface.0.subnetwork
-# }
+output "subnetwork" {
+ value = google_compute_instance.bastion_instance.network_interface.0.subnetwork
+}
 
-# output "subnetwork_name" {
-#  value = google_compute_instance.bastion_instance.network_interface.0.name
-# }
+output "subnetwork_name" {
+ value = google_compute_instance.bastion_instance.network_interface.0.name
+}
 
-# output "alias_ip_range" {
-#  value = google_compute_instance.bastion_instance.network_interface.0.alias_ip_range
-# }
+output "alias_ip_range" {
+ value = google_compute_instance.bastion_instance.network_interface.0.alias_ip_range
+}
