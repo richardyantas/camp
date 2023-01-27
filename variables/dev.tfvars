@@ -5,7 +5,7 @@
 #  
 #
 ####################################################################################################
-
+environment = "dev"
 gcp_vpc_name = "vpc-sc-jenkins-terraform-des"
 gcp_subnet_1 = "subnet-vpc-sc-jenkins-terraform-des"
 gcp_region = "europe-west1"
