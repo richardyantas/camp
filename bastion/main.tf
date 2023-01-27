@@ -16,10 +16,11 @@ resource "google_compute_instance" "bastion_instance" {
   description   = "${var.client}-${var.environment}"
   network_interface { 
     # subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
-    subnetwork = "vpc-subnet-sc-jenkins-terraform-des"
-    subnetwork_project = var.gcp_project_id 
+    subnetwork = "vpc-subnet-sc-jenkins-terraform-des"                 
+    # subnetwork_project = var.gcp_project_id 
+    subnetwork_project = "tenpo"
     access_config {
-      nat_ip = google_compute_address.static.address
+      # nat_ip = google_compute_address.static.address
     }
   }
   boot_disk {
