@@ -3,16 +3,13 @@ resource "google_compute_address" "static" {
 }
 
 # resource "google_compute_instance" "bastion_instance" {
-resource "google_compute_instance" "example_instance" {
+resource "google_compute_instance" "lima_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   # name         = "test"
   machine_type = "f1-micro"
   zone         =  "europe-west3-a"
   # zone         =  "europe-west3"  
-  tags = [
-    "${var.environment}-bastion-http",
-    "${var.environment}-bastion-ssh"
-     ]
+  # tags = [ "${var.environment}-bastion-http", "${var.environment}-bastion-ssh"]
   project      =  var.gcp_project_id
   # description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
   description   = "${var.client}-${var.environment}"

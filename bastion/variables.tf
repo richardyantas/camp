@@ -1,24 +1,35 @@
 
-variable "client" {
-}
 
 variable "environment" {
 
 }
-variable "metadata_startup_script" {
+
+variable "gcp_vpc_name" {
 }
+
+variable "gcp_subnet_1" {
+}
+
+
 variable "gcp_region" {
+}
+
+variable "gcp_project_id" {
+}
+variable "client" {
+}
+
+variable "gcp_vpc_cidr" {
 }
 
 variable "gcp_zone" {
 }
 
-variable "gcp_project_id" {
+variable "cidr_blocks" {
 }
-variable "gcp_subnet_1" {
+variable "machine_type"{
 }
-
-variable "gcp_vpc_name" {
+variable "metadata_startup_script" {
 }
 variable "ssh_user" {
 }
