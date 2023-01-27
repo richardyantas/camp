@@ -4,7 +4,7 @@ pipeline {
     environment {
         GOOGLE_PROJECT_ID = "jovial-atlas-375801" 
         GOOGLE_PROJECT_NAME = "tenpo"
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform')
+        G§OOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform')
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('sc_jenkins_terraform')
     }
     // parameters { 
