@@ -21,7 +21,7 @@ resource "google_compute_instance" "bastion_instance" {
 
   network_interface { 
     
-    network = data.google_compute_network.vpc
+    network = data.google_compute_network.vpc.name
     # subnetwork = data.google_compute_subnetwork.subnet_one.name    
     # subnetwork_project = var.gcp_project_id
 
