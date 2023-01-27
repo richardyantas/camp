@@ -20,7 +20,7 @@ resource "google_compute_instance" "bastion_instance" {
   }
 
   network_interface { 
-    subnetwork = "${data.google_compute_subnetwork.subnet_one.name}"   
+    subnetwork = data.google_compute_subnetwork.subnet_one.name
     
     
     # subnetwork = "vpc-subnet-sc-jenkins-terraform-des"                 
