@@ -21,11 +21,12 @@ resource "google_compute_instance" "bastion_instance" {
 
   network_interface { 
     
+    network = data.google_compute_network.vpc
     # subnetwork = data.google_compute_subnetwork.subnet_one.name    
     # subnetwork_project = var.gcp_project_id
 
-    subnetwork = "vpc-subnet-sc-jenkins-terraform-des"
-    subnetwork_project = "jovial-atlas-375801"
+    # subnetwork = "vpc-subnet-sc-jenkins-terraform-des"
+    # subnetwork_project = "jovial-atlas-375801"
     
     access_config {
       nat_ip = google_compute_address.static.address
