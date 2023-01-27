@@ -20,14 +20,14 @@ resource "google_compute_instance" "bastion_instance" {
   }
 
   network_interface { 
-    # subnetwork = data.google_compute_subnetwork.subnet_one.name    
-    # subnetwork_project = var.gcp_project_id
+    subnetwork = data.google_compute_subnetwork.subnet_one.name    
+    subnetwork_project = var.gcp_project_id
     # # subnetwork = "vpc-subnet-sc-jenkins-terraform-des"
     # # subnetwork_project = "jovial-atlas-375801"
     
-    # access_config {
-    #   nat_ip = google_compute_address.static.address
-    # }
+    access_config {
+      nat_ip = google_compute_address.static.address
+    }
   }
   
   metadata = {
@@ -52,15 +52,15 @@ resource "google_compute_firewall" "http" {
   source_ranges = ["0.0.0.0/0"]
 }
 
-# resource "google_compute_firewall" "ssh" {
-#   name    = "${var.environment}-firewall-ssh"
-#   network = "${data.google_compute_network.vpc.name}"
+resource "google_compute_firewall" "ssh" {
+  name    = "${var.environment}-firewall-ssh"
+  network = "${data.google_compute_network.vpc.name}"
 
-#   allow {
-#     protocol = "tcp"
-#     ports    = ["22"]
-#   }
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
 
-#   target_tags   = ["${var.environment}-bastion-ssh"]
-#   source_ranges = ["0.0.0.0/0"]
-# }
+  target_tags   = ["${var.environment}-bastion-ssh"]
+  source_ranges = ["0.0.0.0/0"]
+}
