@@ -8,7 +8,7 @@ data "google_compute_network" "vpc" {
   project    = var.gcp_project_id
 }
 
-data "google_compute_subnetwork" "subnet-1" {
+data "google_compute_subnetwork" "subnet_one" {
   name   = var.gcp_subnet_1  
   region = var.gcp_zone
 }
