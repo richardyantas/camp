@@ -2,9 +2,9 @@ resource "google_compute_address" "static" {
   name = "ip-external-sc-jenkins-terraform-test2"
 }
 
+
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
-  # name         = "test"
   machine_type = "f1-micro"
   zone         =  "europe-west3-a"
   # zone         =  "europe-west3"  
@@ -15,19 +15,18 @@ resource "google_compute_instance" "bastion_instance" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-10"
+      image = "debian-cloud/debian-11"
     }
   }
 
   network_interface { 
-    subnetwork = data.google_compute_subnetwork.subnet_one.name
-    
-    
-    # subnetwork = "vpc-subnet-sc-jenkins-terraform-des"                 
-    subnetwork_project = var.gcp_project_id 
+    subnetwork = data.google_compute_subnetwork.subnet_one.name    
+    subnetwork_project = var.gcp_project_id
+    # subnetwork = "vpc-subnet-sc-jenkins-terraform-des"
     # subnetwork_project = "jovial-atlas-375801"
+    
     access_config {
-      # nat_ip = google_compute_address.static.address
+      nat_ip = google_compute_address.static.address
     }
   }
   
