@@ -3,7 +3,7 @@ resource "google_compute_address" "static" {
 }
 
 # resource "google_compute_instance" "bastion_instance" {
-resource "google_compute_instance" "bastion_instance" {
+resource "google_compute_instance" "example_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   # name         = "test"
   machine_type = "f1-micro"
