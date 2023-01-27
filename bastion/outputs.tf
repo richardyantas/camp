@@ -19,7 +19,8 @@ output "networkip" {
 }
 
 output "subnetwork" {
- value = google_compute_instance.bastion_instance.network_interface.0.subnetwork
+ # value = google_compute_instance.bastion_instance.network_interface.0.subnetwork
+ value = data.google_compute_subnetwork.subnet_one.name
 }
 
 output "subnetwork_name" {
