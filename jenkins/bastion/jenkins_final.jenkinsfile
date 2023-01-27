@@ -7,10 +7,10 @@ pipeline {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform')
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('sc_jenkins_terraform')
     }
-    parameters { 
-      choice(name: 'ENTORNOS', choices: ['dev', 'pre', 'pro'], description: 'Seleccione el entorno a utilizar')
-      choice(name: 'ACCION', choices: ['', 'plan-apply', 'destroy'], description: 'Seleccione el entorno a utilizar')
-    }
+    // parameters { 
+    //   choice(name: 'ENTORNOS', choices: ['dev', 'pre', 'pro'], description: 'Seleccione el entorno a utilizar')
+    //   choice(name: 'ACCION', choices: ['', 'plan-apply', 'destroy'], description: 'Seleccione el entorno a utilizar')
+    // }
     stages{
         
         stage('clean workspaces -----------') { 
